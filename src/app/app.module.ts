@@ -33,8 +33,8 @@ import { CustomDatePickerComponent } from './components/date-picker/date-picker.
 import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
 import { NZ_I18N, en_US } from 'ng-zorro-antd/i18n';
-import { DatePicker2Component } from './components/date-picker2/date-picker2.component';
-import { DatePicker3Component } from './components/date-picker3/date-picker3.component';
+// import { DatePicker2Component } from './components/date-picker2/date-picker2.component';
+
 registerLocaleData(en);
 const icons = [PlusOutline];
 @NgModule({
@@ -45,8 +45,7 @@ const icons = [PlusOutline];
     EmployeeListComponent,
     EmployeeCardListComponent,
     CustomDatePickerComponent,
-    DatePicker2Component,
-    DatePicker3Component,
+    // DatePicker2Component,
   ],
   imports: [
     BrowserModule,

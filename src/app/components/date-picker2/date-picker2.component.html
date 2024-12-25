@@ -1,44 +1,20 @@
-<div class="date-picker">
-    <div class="date-picker-header">
-      <button (click)="onTodayClick()">Today</button>
-      <button (click)="onNextMondayClick()">Next Monday</button>
-      <button (click)="onNextTuesdayClick()">Next Tuesday</button>
-      <button (click)="onAfter1WeekClick()">After 1 Week</button>
-    </div>
-  
-    <div class="calendar">
-      <div class="calendar-header">
-        <button>&lt;</button>
-        <span>{{ getMonthYear() }}</span>
-        <button>&gt;</button>
-      </div>
-  
-      <div class="calendar-weekdays">
-        <span>Sun</span>
-        <span>Mon</span>
-        <span>Tue</span>
-        <span>Wed</span>
-        <span>Thu</span>
-        <span>Fri</span>
-        <span>Sat</span>
-      </div>
-  
-      <div class="calendar-dates">
-        <div *ngFor="let date of calendarDates; let i = index"
-             class="calendar-date"
-             [class.selected]="i === selectedDateIndex"
-             (click)="onDateClick(i)">
-          {{ date.getDate() }}
-        </div>
-      </div>
-    </div>
-  
-    <div class="selected-date">
-      <span>{{ selectedDateText }}</span>
-    </div>
-  
-    <div class="actions">
-      <button>Cancel</button>
-      <button>Save</button>
-    </div>
+<div class="calendar-container">
+    <mwl-calendar-month-view
+      [viewDate]="viewDate"
+      [events]="events"
+      [activeDayIsOpen]="false"
+      [cellTemplate]="customCell"
+      (dayClicked)="dayClicked($event.day)"
+    >
+    </mwl-calendar-month-view>
   </div>
+  
+  <ng-template #customCell let-day="day" let-locale="locale">
+    <div class="cal-cell-top"
+      [class.range-start]="isRangeStart(day.date)"
+      [class.range-end]="isRangeEnd(day.date)"
+      [class.in-range]="isInRange(day.date)">
+      {{ day.date | date:'d' }}
+    </div>
+  </ng-template>
+  

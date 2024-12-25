@@ -29,6 +29,7 @@ export class EmployeeCardListComponent implements OnInit {
 
   swipeStates: { [key: number]: string } = {};
   startX: number = 0;
+  isDragging: boolean = false;
 
   constructor() {}
 
@@ -42,8 +43,30 @@ export class EmployeeCardListComponent implements OnInit {
 
   onTouchMove(event: TouchEvent, employeeId: number) {
     const currentX = event.touches[0].clientX;
-    const diff = this.startX - currentX;
+    this.handleSwipe(currentX, employeeId);
+  }
 
+  onMouseDown(event: MouseEvent, employeeId: number) {
+    this.startX = event.clientX;
+    this.isDragging = true;
+  }
+
+  onMouseMove(event: MouseEvent, employeeId: number) {
+    if (!this.isDragging) return;
+    const currentX = event.clientX;
+    this.handleSwipe(currentX, employeeId);
+  }
+
+  onMouseUp() {
+    this.isDragging = false;
+  }
+
+  onMouseLeave() {
+    this.isDragging = false;
+  }
+
+  private handleSwipe(currentX: number, employeeId: number) {
+    const diff = this.startX - currentX;
     if (diff > 40) {
       this.swipeStates[employeeId] = 'swiped';
     } else if (diff < -40) {

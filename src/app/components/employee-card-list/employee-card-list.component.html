@@ -11,6 +11,12 @@
           [@swipeState]="swipeStates[employee.id]"
           (touchstart)="onTouchStart($event, employee.id)"
           (touchmove)="onTouchMove($event, employee.id)"
+          (mousedown)="onMouseDown($event, employee.id)"
+          (mousemove)="onMouseMove($event, employee.id)"
+          (mouseup)="onMouseUp()"
+          (mouseleave)="onMouseLeave()"
+          [routerLink]="['/employee/edit', employee.id]"
+          style="cursor: pointer"
         >
           <div class="employee-details">
             <div style="font-size: 16px; font-weight: 500">

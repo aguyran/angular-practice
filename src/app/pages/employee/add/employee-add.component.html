@@ -10,14 +10,15 @@
 >
   <nz-input-group [nzPrefix]="userIcon">
     <input
-      [(ngModel)]="employeeName"
+      [ngModel]="employeeForm().name"
+      (ngModelChange)="updateName($event)"
       nzId="employeeName"
       placeholder="Enter employee name"
       nz-input
     />
   </nz-input-group>
-  <ng-template #userIcon
-    ><img
+  <ng-template #userIcon>
+    <img
       style="margin-right: 4px"
       src="/assets/icons/user.svg"
       nz-icon
@@ -27,7 +28,8 @@
   </ng-template>
 
   <nz-select
-    [(ngModel)]="employeeRole"
+    [ngModel]="employeeForm().role"
+    (ngModelChange)="updateRole($event)"
     nzPlaceholder="Select option"
     [nzSuffixIcon]="'caret-down'"
   >
@@ -37,7 +39,11 @@
       [nzLabel]="role.label"
     ></nz-option>
   </nz-select>
-  <custom-date-picker-start-end [(ngModel)]="dateRange">
+
+  <custom-date-picker-start-end
+    [ngModel]="employeeForm().dateRange"
+    (ngModelChange)="updateDateRange($event)"
+  >
   </custom-date-picker-start-end>
 </div>
 
@@ -47,7 +53,6 @@
     position: sticky;
     bottom: 0;
     width: 100%;
-
     justify-content: flex-end;
   "
 >
@@ -61,6 +66,13 @@
     "
   >
     <button nz-button nzType="default" (click)="closePage()">Cancel</button>
-    <button nz-button nzType="primary" (click)="saveEmployee()">Save</button>
+    <button
+      nz-button
+      nzType="primary"
+      (click)="saveEmployee()"
+      [disabled]="!isFormValid()"
+    >
+      Save
+    </button>
   </div>
 </div>

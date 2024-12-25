@@ -1,0 +1,29 @@
+.calendar-container {
+    background: white;
+    border-radius: 8px;
+    padding: 16px;
+  }
+  
+  .cal-cell-top {
+    min-height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .range-start {
+    background: #1890ff;
+    color: white;
+    border-radius: 4px 0 0 4px;
+  }
+  
+  .range-end {
+    background: #1890ff;
+    color: white;
+    border-radius: 0 4px 4px 0;
+  }
+  
+  .in-range {
+    background: #e6f7ff;
+  }
+  

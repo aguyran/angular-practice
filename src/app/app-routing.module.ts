@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { MainLayoutComponent } from './layout/main-layout/main-layout.component';
 import { EmployeeListComponent } from './pages/employee/list/employee-list.component';
 import { EmployeeAddComponent } from './pages/employee/add/employee-add.component';
-import { DatePicker2Component } from './components/date-picker2/date-picker2.component';
+// import { DatePicker2Component } from './components/date-picker2/date-picker2.component';
 
 const routes: Routes = [
   {
@@ -11,12 +11,13 @@ const routes: Routes = [
     component: MainLayoutComponent,
     children: [
       { path: '', redirectTo: 'employee', pathMatch: 'full' },
-      { path: 'test', component: DatePicker2Component },
+      // { path: 'test', component: DatePicker2Component },
       {
         path: 'employee',
 
         data: { title: 'Employee List' },
         children: [
+          { path: '', redirectTo: 'list', pathMatch: 'full' },
           {
             path: 'list',
             component: EmployeeListComponent,
@@ -26,6 +27,11 @@ const routes: Routes = [
             path: 'add',
             component: EmployeeAddComponent,
             data: { title: 'Add Employee Details' },
+          },
+          {
+            path: 'edit/:id',
+            component: EmployeeAddComponent,
+            data: { title: 'Edit Employee Details' },
           },
         ],
       },

@@ -1,1 +1,24 @@
 /* You can add global styles to this file, and also import other style files */
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap");
+
+* {
+  font-family: "Roboto", sans-serif;
+}
+[nz-button] {
+  border-radius: 6px;
+}
+
+[nz-button].ant-btn[nztype="default"] {
+  background-color: #edf8ff;
+  color: #1da1f2;
+  border: none;
+}
+[nz-button].ant-btn[nztype="primary"][nzdanger] {
+  background-color: #f34642;
+}
+
+.ant-input,
+.ant-picker-range,
+.ant-select .ant-select-selector.ant-select-selector {
+  border-radius: 4px;
+}

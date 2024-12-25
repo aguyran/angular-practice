@@ -1,0 +1,11 @@
+<div class="mobile-container">
+  <nz-header class="header font-roboto">
+    <h1>{{ pageTitle }}</h1>
+  </nz-header>
+
+  
+    <div class="content" [@fadeAnimation]="o.isActivated ? o.activatedRoute : ''">
+      <router-outlet #o="outlet"></router-outlet>
+    </div>
+  
+</div>

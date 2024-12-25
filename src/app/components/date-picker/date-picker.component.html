@@ -1,0 +1,24 @@
+<div class="picker-container">
+    <nz-date-picker
+      [nzDisabledDate]="disabledStartDate"
+      nzShowTime
+      class="start-picker"
+      nzFormat="yyyy-MM-dd HH:mm:ss"
+      [(ngModel)]="startValue"
+      (ngModelChange)="onStartValueChange($event)"
+      nzPlaceHolder="Start"
+      (nzOnOpenChange)="handleStartOpenChange($event)"
+    ></nz-date-picker>
+    <img src="/assets/icons/arrow-right.svg" alt="Arrow" />
+    <nz-date-picker
+      #endDatePicker
+      [nzDisabledDate]="disabledEndDate"
+      nzShowTime
+      class="end-picker"
+      nzFormat="yyyy-MM-dd HH:mm:ss"
+      [(ngModel)]="endValue"
+      (ngModelChange)="onEndValueChange($event)"
+      nzPlaceHolder="End"
+      (nzOnOpenChange)="handleEndOpenChange($event)"
+    ></nz-date-picker>
+  </div>

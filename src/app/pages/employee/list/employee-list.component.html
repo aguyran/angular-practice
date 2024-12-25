@@ -1,0 +1,58 @@
+<div
+  *ngIf="!employeeData || employeeData.length === 0"
+  style="
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 96px);
+  "
+>
+  <div
+    style="
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-size: 18px;
+      font-weight: 500;
+    "
+  >
+    <img src="/assets/employee404.svg" alt="icon" />
+    No employee records found
+  </div>
+</div>
+<div *ngIf="currentEmployees.length > 0">
+  <app-employee-card-list
+    [title]="'Current Employees'"
+    [employees]="currentEmployees"
+    (deleteEmployee)="handleDelete($event)"
+  ></app-employee-card-list>
+</div>
+<div *ngIf="previousEmployees.length > 0">
+  <app-employee-card-list
+    [title]="'Previous Employees'"
+    [employees]="previousEmployees"
+    (deleteEmployee)="handleDelete($event)"
+  ></app-employee-card-list>
+</div>
+<div
+  *ngIf="employeeData && employeeData.length > 0"
+  style="color: #949c9e; font-size: 15px; padding: 0 16px; margin: 12px 0px"
+>
+  Swipe left to delete
+</div>
+<button
+  nz-button
+  nzType="primary"
+  style="
+    border-radius: 8px;
+    position: absolute;
+    bottom: 24px;
+    right: 24px;
+    width: 50px;
+    height: 50px;
+    font-size: 18px;
+  "
+  (click)="navigateToAdd()"
+>
+  <span nz-icon nzType="plus" style="font-size: 18px"></span>
+</button>

@@ -1,0 +1,46 @@
+<div class="employee-grid">
+  <div class="cards-container">
+    <div style="padding: 16px; color: #1da1f2; font-weight: 500">
+      {{ title }}
+    </div>
+    <ng-container *ngFor="let employee of employees">
+      <div class="card-wrapper">
+        <nz-card
+          class="employee-card"
+          [nzBorderless]="true"
+          [@swipeState]="swipeStates[employee.id]"
+          (touchstart)="onTouchStart($event, employee.id)"
+          (touchmove)="onTouchMove($event, employee.id)"
+        >
+          <div class="employee-details">
+            <div style="font-size: 16px; font-weight: 500">
+              {{ employee.name }}
+            </div>
+            <span style="font-size: 14px; color: #949c9e" class="role-badge">
+              {{ employee.role }}
+            </span>
+            <span class="start-date" style="font-size: 12px; color: #949c9e">
+              {{
+                employee.endDate
+                  ? (employee.startDate | date : "dd MMMM, yyyy") +
+                    " - " +
+                    (employee.endDate | date : "dd MMMM, yyyy")
+                  : "From " + (employee.startDate | date : "dd MMMM, yyyy")
+              }}
+            </span>
+          </div>
+        </nz-card>
+        <button
+          *ngIf="!hideButton"
+          class="delete-button"
+          nz-button
+          nzType="primary"
+          nzDanger
+          (click)="onDelete(employee.id)"
+        >
+          <img src="/assets/icons/trash.svg" alt="Delete" />
+        </button>
+      </div>
+    </ng-container>
+  </div>
+</div>

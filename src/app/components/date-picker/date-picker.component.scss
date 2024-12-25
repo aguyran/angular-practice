@@ -1,0 +1,10 @@
+.start-picker,
+.end-picker {
+  max-width: 172px;
+}
+
+.picker-container {
+  display: flex;
+  gap: 16px;
+  justify-content: space-between;
+}

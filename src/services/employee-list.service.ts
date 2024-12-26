@@ -90,15 +90,18 @@ export class EmployeeService {
 
   async deleteEmployee(id: number): Promise<void> {
     const currentEmployees = this.employees.getValue();
+
     const updatedEmployees = currentEmployees.map((employee) =>
       employee.id === id ? { ...employee, deleted: true } : employee
     );
+
     await this.saveToDb(updatedEmployees);
+
     this.employees.next(updatedEmployees);
   }
   getEmployeeById(id: number): Employee | undefined {
     const employees = this.employees.getValue();
-    console.log(this.employees);
+
     return employees.find((employee) => employee.id === id);
   }
 }

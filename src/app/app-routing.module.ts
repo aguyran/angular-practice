@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes, Router } from '@angular/router';
 import { MainLayoutComponent } from './layout/main-layout/main-layout.component';
 import { EmployeeListComponent } from './pages/employee/list/employee-list.component';
 import { EmployeeAddComponent } from './pages/employee/add/employee-add.component';
 // import { DatePicker2Component } from './components/date-picker2/date-picker2.component';
+import { EmployeeService } from 'src/services/employee-list.service';
 
 const routes: Routes = [
   {
@@ -31,7 +32,21 @@ const routes: Routes = [
           {
             path: 'edit/:id',
             component: EmployeeAddComponent,
-            data: { title: 'Edit Employee Details' },
+            data: {
+              title: 'Edit Employee',
+              headerActions: [
+                {
+                  type: 'delete',
+                  name: 'delete',
+                  callback: async (
+                    id: number,
+                    employeeService: EmployeeService
+                  ) => {
+                    await employeeService.deleteEmployee(id);
+                  },
+                },
+              ],
+            },
           },
         ],
       },

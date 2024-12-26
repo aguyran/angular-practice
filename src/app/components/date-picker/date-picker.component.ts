@@ -67,11 +67,11 @@ export class CustomDatePickerComponent implements ControlValueAccessor {
     if (!open) {
       this.endDatePicker.open();
     }
-    console.log('handleStartOpenChange', open);
+   
   }
 
   handleEndOpenChange(open: boolean): void {
-    console.log('handleEndOpenChange', open);
+   
   }
 
   onStartValueChange(value: Date): void {

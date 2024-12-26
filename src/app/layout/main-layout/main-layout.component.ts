@@ -1,7 +1,20 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { filter, map } from 'rxjs/operators';
 import { fadeAnimation } from 'src/app/animations';
+import { EmployeeService } from 'src/services/employee-list.service';
+export type HeaderMeta = {
+  type: string;
+  name: string;
+  icon: string;
+};
+export type HeaderAction = HeaderMeta & {
+  callback: (data: any, employeeService: EmployeeService) => void;
+};
+export type HeaderCall = HeaderMeta & {
+  callback: () => void;
+};
+
 @Component({
   selector: 'app-main-layout',
   templateUrl: './main-layout.component.html',
@@ -10,8 +23,14 @@ import { fadeAnimation } from 'src/app/animations';
 })
 export class MainLayoutComponent {
   pageTitle = '';
+  id: number = 0;
+  headerActions: HeaderCall[] = [];
 
-  constructor(private router: Router, private activatedRoute: ActivatedRoute) {
+  constructor(
+    private router: Router, 
+    private activatedRoute: ActivatedRoute,
+    private employeeService: EmployeeService
+  ) {
     this.router.events
       .pipe(
         filter((event) => event instanceof NavigationEnd),
@@ -20,11 +39,26 @@ export class MainLayoutComponent {
           while (child?.firstChild) {
             child = child.firstChild;
           }
-          return child?.snapshot.data['title'];
+          this.id = Number(child?.snapshot.paramMap.get('id'));
+          return child?.snapshot.data;
         })
       )
-      .subscribe((title) => {
-        this.pageTitle = title;
+      .subscribe((data) => {
+        if (data) {
+          const { title, headerActions } = data;
+          this.headerActions = headerActions || [];
+          if (headerActions) {
+            this.headerActions = headerActions.map((action: HeaderAction) => ({
+              ...action,
+              callback: () => action.callback(this.id, this.employeeService)
+            }));
+          }
+          this.pageTitle = title;
+        }
       });
+  }
+
+  onDeleteSuccess() {
+    this.router.navigate(['/employee/list']);
   }
 }

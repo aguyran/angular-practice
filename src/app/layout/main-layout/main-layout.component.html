@@ -1,11 +1,30 @@
 <div class="mobile-container">
   <nz-header class="header font-roboto">
     <h1>{{ pageTitle }}</h1>
+    <div class="header-actions">
+      <ng-container *ngFor="let action of headerActions">
+        <button
+          nz-button
+          nzType="text"
+          (click)="action.callback(); this.onDeleteSuccess()"
+        >
+          <img
+            *ngIf="action.type === 'delete'"
+            src="/assets/icons/trash.svg"
+            alt="Delete"
+          />
+          <i
+            *ngIf="action.type !== 'delete'"
+            nz-icon
+            [nzType]="action.type"
+            nzTheme="outline"
+          ></i>
+        </button>
+      </ng-container>
+    </div>
   </nz-header>
 
-  
-    <div class="content" [@fadeAnimation]="o.isActivated ? o.activatedRoute : ''">
-      <router-outlet #o="outlet"></router-outlet>
-    </div>
-  
+  <div class="content" [@fadeAnimation]="o.isActivated ? o.activatedRoute : ''">
+    <router-outlet #o="outlet"></router-outlet>
+  </div>
 </div>
